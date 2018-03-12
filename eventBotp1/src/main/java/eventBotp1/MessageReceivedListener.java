@@ -18,7 +18,6 @@ public class MessageReceivedListener extends ListenerAdapter{
 		} else {
 			System.out.println(String.format("[%s][%s] %s#%s: %s", e.getGuild().getName(), e.getChannel().getName(), e.getAuthor().getName(), e.getAuthor().getDiscriminator(), e.getMessage().getContentRaw()));
 		}
-		
 		//shortcuts for common parts of message
 		String command = e.getMessage().getContentStripped().replace(eventBot.prefix, "").split(" ")[0];
 		String args = e.getMessage().getContentRaw().replace(eventBot.prefix, "").replace(command, "").trim();
@@ -48,7 +47,11 @@ public class MessageReceivedListener extends ListenerAdapter{
 		
 		//secret......
 		if(command.equalsIgnoreCase("Secret123")) {
-			ha(e);
+			if(e.getAuthor().getIdLong() == 271414680491261953L) {
+				ha(e);
+			} else {
+				e.getChannel().sendMessage("This is a secret you can't know!!!!! :penguin:").queue();
+			}
 		}
 
 		//adds user to list for dms
@@ -65,9 +68,10 @@ public class MessageReceivedListener extends ListenerAdapter{
 	
 	//output for help
 	private void information(MessageReceivedEvent e) {
-		e.getChannel().sendMessage(String.format("The available list of commands are: \n\nGeneral Commands\n\nHelp:\nThese massages\n\nSet: \nSet is used to set an event reminder for a party.\n "
-				+ "It can only be used by certain individuals within P1.\n To set the event enter in like this: \nMM/DD/YYYY 16:00\n Military time is required and the "
-				+ "time zone difference between your time zone and the GTC must be accounted for.\n An example of this is adding 5 hours to the time for EST.\n\nAdd: \n"
+		e.getChannel().sendMessage(String.format("The available list of commands are: \n\nGeneral Commands\n\nHelp:\nThese massages\n\nEvent: \nevent is used to set an event reminder for a party.\n "
+				+ "It can only be used by certain individuals within P1.\n To set the event enter in like this: \noccurance of event (yearly, daily, weekly, etc.), event name, "
+				+ "MM/DD/YYYY 16:00\n Military time is required and the "
+				+ "time zone difference between your time zone and the CST must be accounted for, as this bot adheres to P1 time.\n An example of this is subtracting 1 hour to the time for EST.\n\nAdd: \n"
 				+ "add yourself to the events reminder list.\n\nRemove:\n remove yourself from the reminder list.")).queue();
 	}
 	
@@ -84,11 +88,3 @@ public class MessageReceivedListener extends ListenerAdapter{
 	}
 	
 }
-
-
-
-
-
-
-//new TimerTriggers().onTimerTriggers(eventMills, adds);
-//membs = e.getGuild().getDefaultChannel().getMembers();
