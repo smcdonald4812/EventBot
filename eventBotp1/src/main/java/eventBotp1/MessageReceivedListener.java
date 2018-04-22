@@ -11,7 +11,9 @@ public class MessageReceivedListener extends ListenerAdapter{
 	
 	public void onMessageReceived(MessageReceivedEvent e) {
 		//check for prefix
-		if(!e.getMessage().getContentRaw().startsWith(eventBot.prefix)) return;
+		if(!e.getMessage().getContentRaw().startsWith(eventBot.prefix)) {
+			return;
+		}
 		//check channel type
 		if(e.getChannelType() == ChannelType.PRIVATE) {
 			System.out.println(String.format("[DM] %s#%s: %s", e.getAuthor().getName(), e.getAuthor().getDiscriminator(), e.getMessage().getContentRaw()));
@@ -88,3 +90,11 @@ public class MessageReceivedListener extends ListenerAdapter{
 	}
 	
 }
+
+
+
+
+
+
+//new TimerTriggers().onTimerTriggers(eventMills, adds);
+//membs = e.getGuild().getDefaultChannel().getMembers();

@@ -1,16 +1,22 @@
+/*
+	want to eventually use timer.scheduleAtFixedRate(TimerTask, Date, long) to make the events fire on a repeated basis
+*/
 package eventBotp1;
 
+import java.awt.Color;
 import java.time.Instant;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class TimerTriggers {
 
 	// dms memb list
+	EmbedBuilder embeded = new EmbedBuilder();
 	private List<Member> adds = eventBot.adds;
 	private Timer timer = new Timer();
 	private final Long threeDay = 259200000L, twoDay = 172800000L, oneDay = 86400000L, sixHour = 21600000L,
@@ -122,8 +128,11 @@ public class TimerTriggers {
 	}
 
 	public void Event(MessageReceivedEvent event, String e, String f) {
-		event.getChannel().sendMessage(":fireworks: EVENT :fireworks:\n" + e + " is happening at:\n" + f
-				+ "\n+add to join the notificaiton list!").queue();
+		embeded.setColor(Color.CYAN);
+		embeded.setDescription("" + e + " is happening at:\n" + f
+				+ "\n+add to join the notificaiton list!");
+		embeded.setTitle(":fireworks: EVENT :fireworks:");
+		event.getChannel().sendMessage(embeded.build()).queue();
 	}
 
 	private String repeatEvent(String s, String re) {

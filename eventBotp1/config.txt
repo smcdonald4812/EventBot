@@ -1,2 +1,2 @@
-token_goes_here
+TOKEN_GOES_HERE
 +
